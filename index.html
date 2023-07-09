@@ -19,62 +19,61 @@
                 <img src="./sprint4-image/avatar.png" alt="Жак-Ив Кусто" class="profile__avatar">
                 <ul class="profile__list">
                     <li>
-                        <h1 class="list__title">Жак-Ив Кусто</h1>
+                        <h1 class="profile__list-title">Жак-Ив Кусто</h1>
                     </li>
-                    <li><button class="list__edit-button">
+                    <li><button class="profile__list-edit-button">
                         </button></li>
                     <li>
-                        <p class="list__subtitle">Исследователь океана</p>
+                        <p class="profile__list-subtitle">Исследователь океана</p>
                     </li>
                 </ul>
             </div>
-            <div class="profile__add">
-                <button class="profile__add-button">
-                </button>
-            </div>
+            <button class="profile__add-button">
+            </button>
+
         </section>
         <section class="elements">
             <ul class="element">
                 <li class="element__item">
-                    <img class="item__img" src="./sprint4-image/карачаево-ч.png" alt="Карачаевск">
-                    <div class="item__content">
-                        <h2 class="item__title">Карачаевск</h2>
-                        <button class="item__button item__button_active"></button>
+                    <img class="element__item-img" src="./sprint4-image/карачаево-ч.png" alt="Карачаевск">
+                    <div class="element__item-content">
+                        <h2 class="element__item-title">Карачаевск</h2>
+                        <button class="element__item-button element__item-button_active"></button>
                     </div>
                 </li>
                 <li class="element__item">
-                    <img class="item__img" src="./sprint4-image/эльбрус.png" alt="Гора Эльбрус">
-                    <div class="item__content">
-                        <h2 class="item__title">Гора Эльбрус</h2>
-                        <button class="item__button item__button_active"></button>
+                    <img class="element__item-img" src="./sprint4-image/эльбрус.png" alt="Гора Эльбрус">
+                    <div class="element__item-content">
+                        <h2 class="element__item-title">Гора Эльбрус</h2>
+                        <button class="element__item-button element__item-button_active"></button>
                     </div>
                 </li>
                 <li class="element__item">
-                    <img class="item__img" src="./sprint4-image/домбай.png" alt="Домбай">
-                    <div class="item__content">
-                        <h2 class="item__title">Домбай</h2>
-                        <button class="item__button item__button_active"></button>
+                    <img class="element__item-img" src="./sprint4-image/домбай.png" alt="Домбай">
+                    <div class="element__item-content">
+                        <h2 class="element__item-title">Домбай</h2>
+                        <button class="element__item-button element__item-button_active"></button>
                     </div>
                 </li>
                 <li class="element__item">
-                    <img class="item__img" src="./sprint4-image/эльбрус.png" alt="">
-                    <div class="item__content">
-                        <h2 class="item__title">Гора Эльбрус</h2>
-                        <button class="item__button item__button_active"></button>
+                    <img class="element__item-img" src="./sprint4-image/эльбрус.png" alt="">
+                    <div class="element__item-content">
+                        <h2 class="element__item-title">Гора Эльбрус</h2>
+                        <button class="element__item-button element__item-button_active"></button>
                     </div>
                 </li>
                 <li class="element__item">
-                    <img class="item__img" src="./sprint4-image/домбай.png" alt="Домбай">
-                    <div class="item__content">
-                        <h2 class="item__title">Домбай</h2>
-                        <button class="item__button item__button_active"></button>
+                    <img class="element__item-img" src="./sprint4-image/домбай.png" alt="Домбай">
+                    <div class="element__item-content">
+                        <h2 class="element__item-title">Домбай</h2>
+                        <button class="element__item-button element__item-button_active"></button>
                     </div>
                 </li>
                 <li class="element__item">
-                    <img class="item__img" src="./sprint4-image/карачаево-ч.png" alt="Карачаевск">
-                    <div class="item__content">
-                        <h2 class="item__title">Карачаево-Черкессия</h2>
-                        <button class="item__button item__button_active"></button>
+                    <img class="element__item-img" src="./sprint4-image/карачаево-ч.png" alt="Карачаевск">
+                    <div class="element__item-content">
+                        <h2 class="element__item-title">Карачаево-Черкессия</h2>
+                        <button class="element__item-button element__item-button_active"></button>
                     </div>
                 </li>
             </ul>
@@ -83,6 +82,22 @@
     <footer class="footer">
         © 2023 Mesto Russia
     </footer>
+    <section class="popup">
+        <div class="popup__container">
+            <img src="./sprint4-image/Close Icon.png" alt="значок крестик" class="popup__close">
+            <h2 class="popup__title">Редактировать профиль</h2>
+            <form action="" class="popup__form">
+                <fieldset class="popup__info">
+                   <input type="text" class="popup__form-name">
+                    <input type="text" class="popup__form-text"> 
+                </fieldset>
+                <button class="popup__save-button">
+                    Сохранить
+                </button>
+                
+            </form>
+        </div>
+    </section>
 </body>
 
 </html>
