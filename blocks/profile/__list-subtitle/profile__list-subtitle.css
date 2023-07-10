@@ -1,0 +1,15 @@
+.profile__list-subtitle {
+    margin: 0;
+    padding-top: 16px;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.21;
+    color: rgba(255, 255, 255, 1);
+}
+
+@media screen and (max-width: 767px) {
+    .profile__list-subtitle {
+        font-size: 14px;
+        padding-top: 14px;
+    }
+}
