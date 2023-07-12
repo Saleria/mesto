@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-image: url(../../../sprint4-image/like.png);
+    background-image: url(../../../images/like.svg);
     background-repeat: no-repeat;
     background-position: center center;
     background-size: contain;
@@ -15,5 +15,5 @@
 }
 
 .element__item-button:hover {
-    opacity: .6;
+    opacity: .5;
 }

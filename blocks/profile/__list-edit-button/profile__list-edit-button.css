@@ -1,6 +1,6 @@
 .profile__list-edit-button {
     background-color: #000000;
-    background-image: url(../../../sprint4-image/Vector.png);
+    background-image: url(../../../images/Vector.svg);
     background-repeat: no-repeat;
     background-position: center center;
     border: solid 1px rgba(255, 255, 255, 1);
@@ -17,6 +17,6 @@
 @media screen and (max-width: 767px) {
     .profile__list-edit-button {
         min-width: 18px;
-        min-height: 18px;
+        min-height: 18px;        
     }
 }
