@@ -69,6 +69,16 @@ function deleteEl(evt) {
     itemDelete.remove();
 }
 
+//создаем функцию,  
+//перебираем каждый эл-т массива,  ,вызываем ее, 
+const render = () => {
+    initialCards.forEach((element) =>{
+        containerElement.append(createdTemplate(element));
+    });        
+};
+
+render();
+
 // пишем template- сщздаем функцию, которая 
 //принимает данные: копирует темплейт со всей вложенностью
 function createdTemplate(element) {
@@ -82,19 +92,9 @@ function createdTemplate(element) {
 
     // навешиваем слушатель: удали по клику с помощью функции deleteEl
     el.querySelector('.element__item-delete').addEventListener('click', deleteEl);
-
-    containerElement.append(el);
-
-    return containerElement;
+    
+    return el;
 };
-
-//создаем функцию,  
-//перебираем каждый эл-т массива,  ,вызываем ее, 
-const render = () => {
-    initialCards.forEach(createdTemplate);        
-};
-
-render();
 
 
 const popupAdd = document.querySelector('.popup_add');
@@ -121,10 +121,12 @@ const sbmtAddBtn = formMesto.querySelector('.popup__save-button_type_mesto');
 
 function handleFormSubmitAdd(evt) {
     evt.preventDefault();
-    const addElement = createdTemplate({name: mestoName.value, link: mestoUrl.value });
-    containerElement.prepend(addElement);
+    const addNewElement = createdTemplate({name: mestoName.value, link: mestoUrl.value });
+    mestoName.value = ''; 
+    mestoUrl.value = ''; 
     popupAddToggle();
+    containerElement.prepend(addNewElement);    
 }
-
+ 
 sbmtAddBtn.addEventListener('click', handleFormSubmitAdd);
 
