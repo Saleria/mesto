@@ -66,7 +66,7 @@ const templateElement = document.querySelector('.element__template');
 // удаление карточки.  возвращаем родительский класс у li,  удаляем его
 function deleteEl(evt) {
     const itemDelete = evt.target.closest('.element__item');
-    itemDelete.remove(); 
+    itemDelete.remove();
 }
 
 // пишем template- сщздаем функцию, которая 
@@ -82,7 +82,7 @@ function createdTemplate(element) {
 
     // навешиваем слушатель: удали по клику с помощью функции deleteEl
     el.querySelector('.element__item-delete').addEventListener('click', deleteEl);
-    
+
     containerElement.append(el);
 
     return containerElement;
@@ -91,7 +91,7 @@ function createdTemplate(element) {
 //создаем функцию,  
 //перебираем каждый эл-т массива,  ,вызываем ее, 
 const render = () => {
-    initialCards.forEach(createdTemplate)
+    initialCards.forEach(createdTemplate);        
 };
 
 render();
@@ -100,10 +100,7 @@ render();
 const popupAdd = document.querySelector('.popup_add');
 const popupAddOpenButton = document.querySelector('.profile__add-button');
 const popupAddCloseButton = document.querySelector('.popup__close_type_mesto');
-//const mestoName = popupAdd.querySelector('.popup__text_type_mesto'); 
-//const mestoUrl = popupAdd.querySelector('.popup__text_type_url'); 
-//const elementTitle = document.querySelector('.element__item-title');
-//const elementImg = document.querySelector('.element__item-img'); 
+
 
 //создаем функцию для добавления класса к новому! попапу по новому классу. 
 //этот класс только у попапа добавления карточек
@@ -114,3 +111,20 @@ const popupAddToggle = function () {
 // навешиваем слушатели по клику - удали/добавь класс открывающий попап
 popupAddOpenButton.addEventListener('click', popupAddToggle);
 popupAddCloseButton.addEventListener('click', popupAddToggle);
+
+//находим кнопку создать и инпуты где забираем данные
+const formMesto = document.querySelector('.popup__form_mesto');
+const mestoName = formMesto.querySelector('.popup__text_type_mesto');
+const mestoUrl = formMesto.querySelector('.popup__text_type_url');
+const sbmtAddBtn = formMesto.querySelector('.popup__save-button_type_mesto');
+
+
+function handleFormSubmitAdd(evt) {
+    evt.preventDefault();
+    const addElement = createdTemplate({name: mestoName.value, link: mestoUrl.value });
+    containerElement.prepend(addElement);
+    popupAddToggle();
+}
+
+sbmtAddBtn.addEventListener('click', handleFormSubmitAdd);
+
