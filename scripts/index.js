@@ -128,5 +128,5 @@ function handleFormSubmitAdd(evt) {
     containerElement.prepend(addNewElement);    
 }
  
-sbmtAddBtn.addEventListener('click', handleFormSubmitAdd);
+formMesto.addEventListener('submit', handleFormSubmitAdd);
 
