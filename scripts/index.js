@@ -93,6 +93,8 @@ function createdTemplate(element) {
     // навешиваем слушатель: удали по клику с помощью функции deleteEl
     el.querySelector('.element__item-delete').addEventListener('click', deleteEl);
     
+    //слушатель: по клику добавь функцию открытия картинки
+    el.querySelector('.element__item-img').addEventListener('click', popupImgOpen);
     return el;
 };
 
@@ -130,3 +132,21 @@ function handleFormSubmitAdd(evt) {
  
 formMesto.addEventListener('submit', handleFormSubmitAdd);
 
+//попап для открытия картинки
+const popupImg = document.querySelector('.popup_type_image');
+
+const popupImgToggle = function () {
+    popupImg.classList.toggle('popup_opened');
+}
+
+// функция: передать в попап картинку и подпись 
+const contentImg = popupImg.querySelector('.popup__img-content');
+const titleImg = popupImg.querySelector('.popup__img-title'); 
+const itemImg = document.querySelector('.element__photo'); 
+const itemTitle = document.querySelector('.element__photo-title');
+
+function popupImgOpen() {
+    popupImgToggle();
+    contentImg.src = itemImg.src;
+    titleImg.textContent = itemTitle.textContent;
+}  
