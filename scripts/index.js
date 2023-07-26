@@ -17,8 +17,8 @@ const mestoUrl = formMesto.querySelector('.popup__text_type_url');
 const sbmtAddBtn = formMesto.querySelector('.popup__save-button_type_mesto');
 const popupImg = document.querySelector('.popup_type_image');
 const contentImg = popupImg.querySelector('.popup__img-content');
-const titleImg = popupImg.querySelector('.popup__img-title'); 
-const itemImg = document.querySelector('.element__photo'); 
+const titleImg = popupImg.querySelector('.popup__img-title');
+const itemImg = document.querySelector('.element__photo');
 const itemTitle = document.querySelector('.element__photo-title');
 const popupImgClose = popupImg.querySelector('.popup__close_type_img');
 
@@ -74,9 +74,9 @@ function deleteEl(evt) {
 }
 
 const render = () => {
-    initialCards.forEach((element) =>{
+    initialCards.forEach((element) => {
         containerElement.append(createdTemplate(element));
-    });        
+    });
 };
 
 render();
@@ -92,7 +92,7 @@ function createdTemplate(element) {
     });
 
     el.querySelector('.element__item-delete').addEventListener('click', deleteEl);
-    
+
     el.querySelector('.element__item-img').addEventListener('click', popupImgOpen);
 
     return el;
@@ -104,13 +104,13 @@ const popupAddToggle = function () {
 
 function handleFormSubmitAdd(evt) {
     evt.preventDefault();
-    const addNewElement = createdTemplate({name: mestoName.value, link: mestoUrl.value });
-    mestoName.value = ''; 
-    mestoUrl.value = ''; 
+    const addNewElement = createdTemplate({ name: mestoName.value, link: mestoUrl.value });
+    mestoName.value = '';
+    mestoUrl.value = '';
     popupAddToggle();
-    containerElement.prepend(addNewElement);    
+    containerElement.prepend(addNewElement);
 }
- 
+
 const popupImgToggle = function () {
     popupImg.classList.toggle('popup_opened');
 }
@@ -119,7 +119,7 @@ function popupImgOpen() {
     popupImgToggle();
     contentImg.src = this.src;
     titleImg.textContent = this.alt;
-}  
+}
 
 formElement.addEventListener('submit', handleFormSubmit);
 popupOpenButton.addEventListener('click', popupOpen);
