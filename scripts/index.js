@@ -6,8 +6,22 @@ const nameInput = formElement.querySelector('.popup__text_type_name');
 const jobInput = formElement.querySelector('.popup__text_type_job');
 const title = document.querySelector('.profile__list-title');
 const subtitle = document.querySelector('.profile__list-subtitle');
+const containerElement = document.querySelector('.element');
+const templateElement = document.querySelector('.element__template');
+const popupAdd = document.querySelector('.popup_add');
+const popupAddOpenButton = document.querySelector('.profile__add-button');
+const popupAddCloseButton = document.querySelector('.popup__close_type_mesto');
+const formMesto = document.querySelector('.popup__form_mesto');
+const mestoName = formMesto.querySelector('.popup__text_type_mesto');
+const mestoUrl = formMesto.querySelector('.popup__text_type_url');
+const sbmtAddBtn = formMesto.querySelector('.popup__save-button_type_mesto');
+const popupImg = document.querySelector('.popup_type_image');
+const contentImg = popupImg.querySelector('.popup__img-content');
+const titleImg = popupImg.querySelector('.popup__img-title'); 
+const itemImg = document.querySelector('.element__photo'); 
+const itemTitle = document.querySelector('.element__photo-title');
+const popupImgClose = popupImg.querySelector('.popup__close_type_img');
 
-//функция открытия и закрытия попапа
 const popupToggle = function () {
     popup.classList.toggle('popup_opened');
 }
@@ -27,12 +41,6 @@ function handleFormSubmit(evt) {
     popupToggle();
 }
 
-formElement.addEventListener('submit', handleFormSubmit);
-popupOpenButton.addEventListener('click', popupOpen);
-popupCloseButton.addEventListener('click', popupToggle);
-
-
-//добавляем 6 карточек при загрузке  страницы
 const initialCards = [
     {
         name: 'Архыз',
@@ -60,17 +68,11 @@ const initialCards = [
     }
 ];
 
-const containerElement = document.querySelector('.element');
-const templateElement = document.querySelector('.element__template');
-
-// удаление карточки.  возвращаем родительский класс у li,  удаляем его
 function deleteEl(evt) {
     const itemDelete = evt.target.closest('.element__item');
     itemDelete.remove();
 }
 
-//создаем функцию,  
-//перебираем каждый эл-т массива,  ,вызываем ее, 
 const render = () => {
     initialCards.forEach((element) =>{
         containerElement.append(createdTemplate(element));
@@ -79,47 +81,26 @@ const render = () => {
 
 render();
 
-// пишем template- сщздаем функцию, которая 
-//принимает данные: копирует темплейт со всей вложенностью
 function createdTemplate(element) {
     const el = templateElement.content.cloneNode(true);
     el.querySelector('.element__item-title').textContent = element.name;
     el.querySelector('.element__item-img').src = element.link;
-    //лайк карточки: обработчик клика + переключение класса
+    el.querySelector('.element__item-img').alt = element.name;
+
     el.querySelector('.element__item-button').addEventListener('click', function (evt) {
         evt.target.classList.toggle('element__item-button_active');
     });
 
-    // навешиваем слушатель: удали по клику с помощью функции deleteEl
     el.querySelector('.element__item-delete').addEventListener('click', deleteEl);
     
-    //слушатель: по клику добавь функцию открытия картинки
     el.querySelector('.element__item-img').addEventListener('click', popupImgOpen);
+
     return el;
 };
 
-
-const popupAdd = document.querySelector('.popup_add');
-const popupAddOpenButton = document.querySelector('.profile__add-button');
-const popupAddCloseButton = document.querySelector('.popup__close_type_mesto');
-
-
-//создаем функцию для добавления класса к новому! попапу по новому классу. 
-//этот класс только у попапа добавления карточек
 const popupAddToggle = function () {
     popupAdd.classList.toggle('popup_opened');
 }
-
-// навешиваем слушатели по клику - удали/добавь класс открывающий попап
-popupAddOpenButton.addEventListener('click', popupAddToggle);
-popupAddCloseButton.addEventListener('click', popupAddToggle);
-
-//находим кнопку создать и инпуты где забираем данные
-const formMesto = document.querySelector('.popup__form_mesto');
-const mestoName = formMesto.querySelector('.popup__text_type_mesto');
-const mestoUrl = formMesto.querySelector('.popup__text_type_url');
-const sbmtAddBtn = formMesto.querySelector('.popup__save-button_type_mesto');
-
 
 function handleFormSubmitAdd(evt) {
     evt.preventDefault();
@@ -130,23 +111,20 @@ function handleFormSubmitAdd(evt) {
     containerElement.prepend(addNewElement);    
 }
  
-formMesto.addEventListener('submit', handleFormSubmitAdd);
-
-//попап для открытия картинки
-const popupImg = document.querySelector('.popup_type_image');
-
 const popupImgToggle = function () {
     popupImg.classList.toggle('popup_opened');
 }
 
-// функция: передать в попап картинку и подпись 
-const contentImg = popupImg.querySelector('.popup__img-content');
-const titleImg = popupImg.querySelector('.popup__img-title'); 
-const itemImg = document.querySelector('.element__photo'); 
-const itemTitle = document.querySelector('.element__photo-title');
-
 function popupImgOpen() {
     popupImgToggle();
-    contentImg.src = itemImg.src;
-    titleImg.textContent = itemTitle.textContent;
+    contentImg.src = this.src;
+    titleImg.textContent = this.alt;
 }  
+
+formElement.addEventListener('submit', handleFormSubmit);
+popupOpenButton.addEventListener('click', popupOpen);
+popupCloseButton.addEventListener('click', popupToggle);
+popupAddOpenButton.addEventListener('click', popupAddToggle);
+popupAddCloseButton.addEventListener('click', popupAddToggle);
+formMesto.addEventListener('submit', handleFormSubmitAdd);
+popupImgClose.addEventListener('click', popupImgToggle); 
