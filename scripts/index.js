@@ -21,24 +21,32 @@ const titleImg = popupImg.querySelector('.popup__img-title');
 const itemImg = document.querySelector('.element__photo');
 const itemTitle = document.querySelector('.element__photo-title');
 const popupImgClose = popupImg.querySelector('.popup__close_type_img');
+const popupEditProfile = document.querySelector('.popup_edit-profile');
 
-const popupToggle = function () {
-    popup.classList.toggle('popup_opened');
+//открытие и закрытие попапа
+function closePopup(item) {
+    item.classList.remove('popup_opened');
 }
 
-function popupOpen() {
-    popupToggle();
+function openPopup(item) {
+    item.classList.add('popup_opened');
+}
+
+//открытие попапа редактирования с сохранением исход.данных
+function openProfilePopup() {
+    openPopup(popupEditProfile);
     nameInput.value = title.textContent;
     jobInput.value = subtitle.textContent;
 }
 
+//сохранение новых данных в попапе редактир.и закрытие попапа
 function handleFormSubmit(evt) {
     evt.preventDefault();
-    let nameValue = nameInput.value;
-    let jobValue = jobInput.value;
+    const nameValue = nameInput.value;
+    const jobValue = jobInput.value;
     title.textContent = nameValue;
     subtitle.textContent = jobValue;
-    popupToggle();
+    closePopup(popupEditProfile);
 }
 
 const initialCards = [
@@ -68,63 +76,75 @@ const initialCards = [
     }
 ];
 
+//удаление карточек
 function deleteEl(evt) {
     const itemDelete = evt.target.closest('.element__item');
     itemDelete.remove();
 }
 
-const render = () => {
+const renderInitialCards = () => {
     initialCards.forEach((element) => {
         containerElement.append(createdTemplate(element));
     });
 };
 
-render();
+renderInitialCards();
 
+//темлпейт
 function createdTemplate(element) {
     const el = templateElement.content.cloneNode(true);
+    const elementImg = el.querySelector('.element__item-img');
     el.querySelector('.element__item-title').textContent = element.name;
-    el.querySelector('.element__item-img').src = element.link;
-    el.querySelector('.element__item-img').alt = element.name;
+    elementImg.src = element.link;
+    elementImg.alt = element.name;
 
+//лайк
     el.querySelector('.element__item-button').addEventListener('click', function (evt) {
         evt.target.classList.toggle('element__item-button_active');
     });
 
+//слушатель на удаление
     el.querySelector('.element__item-delete').addEventListener('click', deleteEl);
 
-    el.querySelector('.element__item-img').addEventListener('click', popupImgOpen);
+//слушатель открытия картинки во весь экран
+    elementImg.addEventListener('click', function(){
+        openPopup(popupImg);
+        contentImg.src = element.link;
+        contentImg.alt = element.name; 
+        titleImg.textContent = element.name;
+    });
 
     return el;
 };
 
-const popupAddToggle = function () {
-    popupAdd.classList.toggle('popup_opened');
-}
-
+//сохранение новой карточки в начало блока и закрытие попапа добавления карточки
 function handleFormSubmitAdd(evt) {
     evt.preventDefault();
     const addNewElement = createdTemplate({ name: mestoName.value, link: mestoUrl.value });
     mestoName.value = '';
     mestoUrl.value = '';
-    popupAddToggle();
+    closePopup(popupAdd);
     containerElement.prepend(addNewElement);
 }
 
-const popupImgToggle = function () {
-    popupImg.classList.toggle('popup_opened');
-}
-
-function popupImgOpen() {
-    popupImgToggle();
-    contentImg.src = this.src;
-    titleImg.textContent = this.alt;
-}
-
+//слушатели событий
+//сохранение редактирования профиля
 formElement.addEventListener('submit', handleFormSubmit);
-popupOpenButton.addEventListener('click', popupOpen);
-popupCloseButton.addEventListener('click', popupToggle);
-popupAddOpenButton.addEventListener('click', popupAddToggle);
-popupAddCloseButton.addEventListener('click', popupAddToggle);
+//открытие и закрытие профиля
+popupOpenButton.addEventListener('click', openProfilePopup);
+popupCloseButton.addEventListener('click', function(){
+    closePopup(popupEditProfile);
+});
+//открытие и закрытие попапа добавления карточки
+popupAddOpenButton.addEventListener('click', function(){
+    openPopup(popupAdd); 
+});
+popupAddCloseButton.addEventListener('click', function(){
+    closePopup(popupAdd); 
+});
+//сохранение новой карточки
 formMesto.addEventListener('submit', handleFormSubmitAdd);
-popupImgClose.addEventListener('click', popupImgToggle); 
+//закрытие картинки во весь экран
+popupImgClose.addEventListener('click', function(){
+    closePopup(popupImg); 
+}); 
