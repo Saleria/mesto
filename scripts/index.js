@@ -1,9 +1,9 @@
 const popup = document.querySelector('.popup');
-const popupOpenButton = document.querySelector('.profile__list-edit-button');
-const popupCloseButton = popup.querySelector('.popup__close');
-const formElement = document.querySelector('.popup__form');
-const nameInput = formElement.querySelector('.popup__text_type_name');
-const jobInput = formElement.querySelector('.popup__text_type_job');
+const buttonOpenEditProfileForm = document.querySelector('.profile__list-edit-button');
+const buttonCloseEditProfileForm = popup.querySelector('.popup__close');
+const formEditProfile = document.querySelector('.popup__form');
+const nameInput = formEditProfile.querySelector('.popup__text_type_name');
+const jobInput = formEditProfile.querySelector('.popup__text_type_job');
 const profileName = document.querySelector('.profile__list-title');
 const profileJob = document.querySelector('.profile__list-subtitle');
 const containerCards = document.querySelector('.element');
@@ -11,13 +11,12 @@ const templateElement = document.querySelector('.element__template');
 const popupAddCard = document.querySelector('.popup_add');
 const popupAddOpenButton = document.querySelector('.profile__add-button');
 const popupAddCloseButton = document.querySelector('.popup__close_type_mesto');
-const formNewMesto = document.querySelector('.popup__form_mesto');
-const mestoName = formNewMesto.querySelector('.popup__text_type_mesto');
-const mestoUrl = formNewMesto.querySelector('.popup__text_type_url');
-const sbmtAddBtn = formNewMesto.querySelector('.popup__save-button_type_mesto');
+const formAddCard = document.querySelector('.popup__form_mesto');
+const mestoName = formAddCard.querySelector('.popup__text_type_mesto');
+const mestoUrl = formAddCard.querySelector('.popup__text_type_url');
 const popupViewImage = document.querySelector('.popup_type_image');
-const ViewImageContent = popupViewImage.querySelector('.popup__img-content');
-const ViewImageTitle = popupViewImage.querySelector('.popup__img-title');
+const viewImageContent = popupViewImage.querySelector('.popup__img-content');
+const viewImageTitle = popupViewImage.querySelector('.popup__img-title');
 const popupViewImageCloseButton = popupViewImage.querySelector('.popup__close_type_img');
 const popupEditProfile = document.querySelector('.popup_edit-profile');
 
@@ -31,14 +30,14 @@ function openPopup(item) {
 }
 
 //открытие попапа редактирования с сохранением исход.данных
-function openProfile() {
+function openEditProfileForm() {
     openPopup(popupEditProfile);
     nameInput.value = profileName.textContent;
     jobInput.value = profileJob.textContent;
 }
 
 //сохранение новых данных в попапе редактир.и закрытие попапа
-function handleFormSubmit(evt) {
+function submitEditProfileForm(evt) {
     evt.preventDefault();
     const nameValue = nameInput.value;
     const jobValue = jobInput.value;
@@ -80,9 +79,9 @@ function createdTemplate(element) {
     //слушатель и функция открытия картинки во весь экран
     cardImage.addEventListener('click', function () {
         openPopup(popupViewImage);
-        ViewImageContent.src = element.link;
-        ViewImageContent.alt = element.name;
-        ViewImageTitle.textContent = element.name;
+        viewImageContent.src = element.link;
+        viewImageContent.alt = element.name;
+        viewImageTitle.textContent = element.name;
     });
 
     return card;
@@ -100,10 +99,10 @@ function handleFormSubmitAdd(evt) {
 
 //слушатели событий
 //сохранение редактирования профиля
-formElement.addEventListener('submit', handleFormSubmit);
+formEditProfile.addEventListener('submit', submitEditProfileForm);
 //открытие и закрытие профиля
-popupOpenButton.addEventListener('click', openProfile);
-popupCloseButton.addEventListener('click', function () {
+buttonOpenEditProfileForm.addEventListener('click', openEditProfileForm);
+buttonCloseEditProfileForm.addEventListener('click', function () {
     closePopup(popupEditProfile);
 });
 //открытие и закрытие попапа добавления карточки
@@ -114,7 +113,7 @@ popupAddCloseButton.addEventListener('click', function () {
     closePopup(popupAddCard);
 });
 //сохранение новой карточки
-formNewMesto.addEventListener('submit', handleFormSubmitAdd);
+formAddCard.addEventListener('submit', handleFormSubmitAdd);
 //закрытие картинки во весь экран
 popupViewImageCloseButton.addEventListener('click', function () {
     closePopup(popupViewImage);
