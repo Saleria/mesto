@@ -4,4 +4,8 @@
     font-weight: 400;
     line-height: normal;
     color: rgba(255, 0, 0, 1);
+    display: block;
+    box-sizing: border-box;
+    margin-top: 5px;
+    min-height: 34px;
 }
