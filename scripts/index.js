@@ -91,10 +91,9 @@ function createdTemplate(element) {
 function handleFormSubmitAdd(evt) {
     evt.preventDefault();
     const addNewElement = createdTemplate({ name: mestoName.value, link: mestoUrl.value });
-    mestoName.value = '';
-    mestoUrl.value = '';
     closePopup(popupAddCard);
     containerCards.prepend(addNewElement);
+    formAddCard.reset();
 }
 
 //слушатели событий
@@ -117,4 +116,86 @@ formAddCard.addEventListener('submit', handleFormSubmitAdd);
 //закрытие картинки во весь экран
 popupViewImageCloseButton.addEventListener('click', function () {
     closePopup(popupViewImage);
-}); 
+});
+
+//закрытие попапа по клику на оверлей. 
+function closeOnOverlay(evt) {
+    if (evt.currentTarget == evt.target) {
+        closePopup(evt.target);
+    };
+}
+//выбираем все попапы на странице и добавляем слушатель события 
+document.querySelectorAll('.popup').forEach((popup) => {
+    popup.addEventListener('click', closeOnOverlay);
+});
+
+//popup.addEventListener('click', closeOnOverlay);
+
+
+// закрываем попап нажатием на Esc. 
+function closeOnEscape(evt) {
+    const popupOpen = document.querySelector('.popup_opened');
+    if (evt.key == 'Escape') {
+        closePopup(popupOpen);
+    };
+}
+document.addEventListener('keydown', closeOnEscape);
+
+//функция изменения сообщения  об ошибке
+//получаем инпуты и формы
+const formInput = formEditProfile.querySelector('#text-name');
+const InformInput = formEditProfile.querySelector('#inform');
+const formEditProfileSaveButton = popupEditProfile.querySelector('.popup__save-button');
+//слушатель должен проверить каждый инпут на валидность и 
+//если есть ошибки - вставить спан
+const validateInput = (inputElement) => {
+    const errorElement = document.querySelector(`#${inputElement.id}-error`)
+    if (inputElement.checkValidity()) {
+        errorElement.textContent = '';
+    } else {
+        errorElement.textContent = inputElement.validationMessage;
+    }
+
+    //активность кнопки
+    //if (formEditProfile.checkValidity()) {
+
+    //}
+};
+const validateForm = (evt) => {
+    evt.preventDefault();
+    formEditProfile.reset();
+    validateInput(formInput);
+    validateInput(InformInput);
+};
+
+const validateFormOnInput = (evt) => {
+    validateInput(evt.target);
+}
+
+//повесим слушатель на сабмит формы
+formEditProfile.addEventListener('submit', validateForm);
+
+//повесим слушатель на ввод в инпут
+formEditProfile.addEventListener('input', validateFormOnInput);
+
+const enableValidation = () => {
+    const formList = Array.from(document.querySelectorAll('.popup__form'));
+    formList.forEach((inputElement) => {
+        validateFormOnInput(inputElement);
+    });
+};
+enableValidation();
+
+//const formInput = formEditProfile.querySelector('.popup__text');
+//const formError = formEditProfile.querySelector(`#${formInput.id}-error`);
+
+//const showInputError = (element, errorMessage) => {
+   // element.classListAdd('popup__text_invalid');
+   // formError.textContent = errorMessage;
+    //formError.classListAdd('popup__error-message');
+//};
+//const isValid = (formElement, inputElement) => {
+    //if (!inputElement.validity.valid) {
+       // showInputError(formElement, inputElement, inputElement.validationMessage);
+   // }
+//};
