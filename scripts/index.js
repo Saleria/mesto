@@ -1,7 +1,7 @@
 const popup = document.querySelector('.popup');
 const buttonOpenEditProfileForm = document.querySelector('.profile__list-edit-button');
 const buttonCloseEditProfileForm = popup.querySelector('.popup__close');
-const formEditProfile = document.querySelector('.popup__form');
+const formEditProfile = document.querySelector('.popup__form-profile');
 const nameInput = formEditProfile.querySelector('.popup__text_type_name');
 const jobInput = formEditProfile.querySelector('.popup__text_type_job');
 const profileName = document.querySelector('.profile__list-title');
@@ -129,73 +129,94 @@ document.querySelectorAll('.popup').forEach((popup) => {
     popup.addEventListener('click', closeOnOverlay);
 });
 
-//popup.addEventListener('click', closeOnOverlay);
-
-
-// закрываем попап нажатием на Esc. 
+// закрываем попап нажатием на Esc для всех попапов с классом opened 
 function closeOnEscape(evt) {
-    const popupOpen = document.querySelector('.popup_opened');
     if (evt.key == 'Escape') {
-        closePopup(popupOpen);
+        closePopup(document.querySelector('.popup_opened'));
     };
 }
 document.addEventListener('keydown', closeOnEscape);
 
-//функция изменения сообщения  об ошибке
-//получаем инпуты и формы
-const formInput = formEditProfile.querySelector('#text-name');
-const InformInput = formEditProfile.querySelector('#inform');
-const formEditProfileSaveButton = popupEditProfile.querySelector('.popup__save-button');
-//слушатель должен проверить каждый инпут на валидность и 
-//если есть ошибки - вставить спан
-const validateInput = (inputElement) => {
-    const errorElement = document.querySelector(`#${inputElement.id}-error`)
-    if (inputElement.checkValidity()) {
-        errorElement.textContent = '';
+//вынесем необходимые эл-ты формы в констаты. 
+const formElement = document.querySelector('.popup__form');
+const inputElement = formElement.querySelector('.popup__text');
+
+//выбираем эл-т ошибки на основе id 
+// функция показывает эл-т ошибки 
+const showInputError = (formElement, inputElement, errorMessage, validationSettings) => {
+    const formError = formElement.querySelector(`#${inputElement.id}-error`);
+    inputElement.classList.add(validationSettings.inputErrorClass);
+    formError.textContent = errorMessage;
+    formError.classList.add(validationSettings.errorClass);
+};
+
+// функция скрывает эл-т ошибки
+const hideInputError = (formElement, inputElement, validationSettings) => {
+    const formError = formElement.querySelector(`#${inputElement.id}-error`);
+    inputElement.classList.remove(validationSettings.inputErrorClass);
+    formError.textContent = '';
+    formError.classList.remove(validationSettings.errorClass);
+};
+
+
+// проверка поля на валидность
+const checkInputValidity = (formElement, inputElement, validationSettings) => {
+    if (!inputElement.validity.valid) {
+        showInputError(formElement, inputElement, inputElement.validationMessage, validationSettings);
     } else {
-        errorElement.textContent = inputElement.validationMessage;
+        hideInputError(formElement, inputElement, validationSettings);
     }
-
-    //активность кнопки
-    //if (formEditProfile.checkValidity()) {
-
-    //}
-};
-const validateForm = (evt) => {
-    evt.preventDefault();
-    formEditProfile.reset();
-    validateInput(formInput);
-    validateInput(InformInput);
 };
 
-const validateFormOnInput = (evt) => {
-    validateInput(evt.target);
-}
+//дизейблим кнопку
+// ищем невалидные импуты в массиве полей ввода
+const checkInvalidInput = (inputList) => {
+    return inputList.some((inputElement) => {
+        return !inputElement.validity.valid;
+    })
+};
 
-//повесим слушатель на сабмит формы
-formEditProfile.addEventListener('submit', validateForm);
+//отключаем и включаем кнопку.
+//принимает массив полей ввода и саму кнопку
+const toggleButtonState = (inputList, buttonSave, validationSettings) => {
+    if (checkInvalidInput(inputList)) {
+        buttonSave.classList.add(validationSettings.inactiveButtonClass);
+        buttonSave.setAttribute('disabled', true);
+    } else {
+        buttonSave.classList.remove(validationSettings.inactiveButtonClass);
+        buttonSave.removeAttribute('disabled', false);
+    }
+};
 
-//повесим слушатель на ввод в инпут
-formEditProfile.addEventListener('input', validateFormOnInput);
-
-const enableValidation = () => {
-    const formList = Array.from(document.querySelectorAll('.popup__form'));
-    formList.forEach((inputElement) => {
-        validateFormOnInput(inputElement);
+//добавл.обработчик всем полям формы
+//ищем все поля внутри формы, делаем массив и каждому полю навешиваем слушатель
+//вызываем функцию включ и отключ кнопки отправки
+const setEventListeners = (formElement, validationSettings) => {
+    const inputList = Array.from(formElement.querySelectorAll(validationSettings.inputSelector));
+    const buttonSave = formElement.querySelector(validationSettings.submitButtonSelector);
+    toggleButtonState(inputList, buttonSave, validationSettings);
+    inputList.forEach((inputElement) => {
+        inputElement.addEventListener('input', () => {
+            checkInputValidity(formElement, inputElement, validationSettings);
+            toggleButtonState(inputList, buttonSave, validationSettings);
+        });
     });
 };
-enableValidation();
 
-//const formInput = formEditProfile.querySelector('.popup__text');
-//const formError = formEditProfile.querySelector(`#${formInput.id}-error`);
+//добавляем обработчик всем формам на странице
+//находим все формы в дом, создаем массив и для каждой формы вызываем функцию
+const enableValidation = (validationSettings) => {
+    const formList = Array.from(document.querySelectorAll(validationSettings.formSelector));
+    formList.forEach((formElement) => {
+        setEventListeners(formElement, validationSettings);
+    });
+};
 
-//const showInputError = (element, errorMessage) => {
-   // element.classListAdd('popup__text_invalid');
-   // formError.textContent = errorMessage;
-    //formError.classListAdd('popup__error-message');
-//};
-//const isValid = (formElement, inputElement) => {
-    //if (!inputElement.validity.valid) {
-       // showInputError(formElement, inputElement, inputElement.validationMessage);
-   // }
-//};
+enableValidation({
+    formSelector: '.popup__form',
+    inputSelector: '.popup__text',
+    submitButtonSelector: '.popup__save-button',
+    inactiveButtonClass: 'popup__save-button_inactive',
+    inputErrorClass: 'popup__input_type_error',
+    errorClass: 'popup__error-message'
+});

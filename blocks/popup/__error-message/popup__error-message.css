@@ -1,0 +1,7 @@
+.popup__error-message {
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    color: rgba(255, 0, 0, 1);
+}
