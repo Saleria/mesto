@@ -41,12 +41,16 @@
             <h2 class="popup__title">Редактировать профиль</h2>
             <form class="popup__form popup__form-profile" name="form" novalidate>
                 <fieldset class="popup__info">
-                    <input type="text" id="text-name" name="text-name" class="popup__text popup__text_type_name" placeholder="Имя"
-                        required minlength="2" maxlength="40">
-                    <span id="text-name-error" class="popup__error-message"></span>
-                    <input type="text" id="inform" name="job-name" class="popup__text popup__text_type_job"
-                        placeholder="Вид деятельности" required minlength="2" maxlength="200">
-                    <span id="inform-error" class="popup__error-message"></span>
+                    <div class="popup__input">
+                        <input type="text" id="text-name" name="text-name" class="popup__text popup__text_type_name"
+                            placeholder="Имя" required minlength="2" maxlength="40">
+                        <span id="text-name-error" class="popup__error-message"></span>
+                    </div>
+                    <div class="popup__input">
+                        <input type="text" id="inform" name="job-name" class="popup__text popup__text_type_job"
+                            placeholder="Вид деятельности" required minlength="2" maxlength="200">
+                        <span id="inform-error" class="popup__error-message"></span>
+                    </div>
                 </fieldset>
                 <button class="popup__save-button" type="submit" disabled>
                     Сохранить
@@ -61,13 +65,18 @@
             <h2 class="popup__title">Новое место</h2>
             <form class="popup__form popup__form_mesto" name="form" novalidate>
                 <fieldset class="popup__info">
-                    <input id="text-name" autocomplete="off" type="text" name="text-name" class="popup__text popup__text_type_mesto"
-                        placeholder="Название" required minlength="2" maxlength="30">
-                        <span id="text-name-error" class="popup__error-message"></span>
-                    <input id="inform" autocomplete="off" type="url" name="url" class="popup__text popup__text_type_url"
-                        placeholder="Ссылка на картинку" required>
-                        <span id="inform-error" class="popup__error-message"></span>
-                    </fieldset>
+                    <div class="popup__input">
+                        <input id="mesto-name" autocomplete="off" type="text" name="text-name"
+                            class="popup__text popup__text_type_mesto" placeholder="Название" required minlength="2"
+                            maxlength="30">
+                        <span id="mesto-name-error" class="popup__error-message"></span>
+                    </div>
+                    <div class="popup__input">
+                        <input id="url" autocomplete="off" type="url" name="url"
+                            class="popup__text popup__text_type_url" placeholder="Ссылка на картинку" required>
+                        <span id="url-error" class="popup__error-message"></span>
+                    </div>
+                </fieldset>
                 <button class="popup__save-button popup__save-button_type_mesto" type="submit" disabled>
                     Создать
                 </button>

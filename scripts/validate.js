@@ -1,15 +1,10 @@
-//вынесем необходимые эл-ты формы в констаты. 
-const formElement = document.querySelector('.popup__form');
-const inputElement = formElement.querySelector('.popup__text');
-
-//выбираем эл-т ошибки на основе id 
 // функция показывает эл-т ошибки 
 const showInputError = (formElement, inputElement, errorMessage, validationSettings) => {
     const formError = formElement.querySelector(`#${inputElement.id}-error`);
     inputElement.classList.add(validationSettings.inputErrorClass);
     formError.textContent = errorMessage;
     formError.classList.add(validationSettings.errorClass);
-};
+  };
 
 // функция скрывает эл-т ошибки
 const hideInputError = (formElement, inputElement, validationSettings) => {
