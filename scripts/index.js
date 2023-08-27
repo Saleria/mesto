@@ -7,7 +7,6 @@ const jobInput = formEditProfile.querySelector('.popup__text_type_job');
 const profileName = document.querySelector('.profile__list-title');
 const profileJob = document.querySelector('.profile__list-subtitle');
 const containerCards = document.querySelector('.element');
-const templateElement = document.querySelector('.element__template');
 const popupAddCard = document.querySelector('.popup_add');
 const popupAddOpenButton = document.querySelector('.profile__add-button');
 const popupAddCloseButton = document.querySelector('.popup__close_type_mesto');
@@ -46,43 +45,6 @@ function submitEditProfileForm(evt) {
     profileJob.textContent = jobValue;
     closePopup(popupEditProfile);
 }
-
-
-
-//const renderInitialCards = () => {
-  //  initialCards.forEach((element) => {
-    //    containerCards.append(createdTemplate(element));
-    //});
-//};
-
-//renderInitialCards();
-
-//темплейт: копируем содержимое карточки,передаем данные
-//function createdTemplate(element) {
-  //  const card = templateElement.content.cloneNode(true);
-    //const cardImage = card.querySelector('.element__item-img');
-   // card.querySelector('.element__item-title').textContent = element.name;
-   // cardImage.src = element.link;
-   // cardImage.alt = element.name;
-
-    //лайк
-    //card.querySelector('.element__item-button').addEventListener('click', function (evt) {
-        //evt.target.classList.toggle('element__item-button_active');
-    //});
-
-    //слушатель на удаление
-    //card.querySelector('.element__item-delete').addEventListener('click', deleteCard);
-
-    //слушатель и функция открытия картинки во весь экран
-    //cardImage.addEventListener('click', function () {
-      //  openPopup(popupViewImage);
-     //   viewImageContent.src = element.link;
-     //   viewImageContent.alt = element.name;
-     //   viewImageTitle.textContent = element.name;
-   // });
-
-   // return card;
-//};
 
 //сохранение новой карточки в начало блока и закрытие попапа добавления карточки
 function handleFormSubmitAdd(evt) {
