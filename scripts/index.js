@@ -15,8 +15,6 @@ const formAddCard = document.querySelector('.popup__form_mesto');
 const mestoName = formAddCard.querySelector('.popup__text_type_mesto');
 const mestoUrl = formAddCard.querySelector('.popup__text_type_url');
 const popupViewImage = document.querySelector('.popup_type_image');
-const viewImageContent = popupViewImage.querySelector('.popup__img-content');
-const viewImageTitle = popupViewImage.querySelector('.popup__img-title');
 const popupViewImageCloseButton = popupViewImage.querySelector('.popup__close_type_img');
 const popupEditProfile = document.querySelector('.popup_edit-profile');
 
@@ -49,46 +47,42 @@ function submitEditProfileForm(evt) {
     closePopup(popupEditProfile);
 }
 
-//удаление карточек
-function deleteCard(evt) {
-    const itemDelete = evt.target.closest('.element__item');
-    itemDelete.remove();
-}
 
-const renderInitialCards = () => {
-    initialCards.forEach((element) => {
-        containerCards.append(createdTemplate(element));
-    });
-};
 
-renderInitialCards();
+//const renderInitialCards = () => {
+  //  initialCards.forEach((element) => {
+    //    containerCards.append(createdTemplate(element));
+    //});
+//};
+
+//renderInitialCards();
 
 //темплейт: копируем содержимое карточки,передаем данные
-function createdTemplate(element) {
-    const card = templateElement.content.cloneNode(true);
-    const cardImage = card.querySelector('.element__item-img');
-    card.querySelector('.element__item-title').textContent = element.name;
-    cardImage.src = element.link;
-    cardImage.alt = element.name;
+//function createdTemplate(element) {
+  //  const card = templateElement.content.cloneNode(true);
+    //const cardImage = card.querySelector('.element__item-img');
+   // card.querySelector('.element__item-title').textContent = element.name;
+   // cardImage.src = element.link;
+   // cardImage.alt = element.name;
 
     //лайк
-    card.querySelector('.element__item-button').addEventListener('click', function (evt) {
-        evt.target.classList.toggle('element__item-button_active');
-    });
+    //card.querySelector('.element__item-button').addEventListener('click', function (evt) {
+        //evt.target.classList.toggle('element__item-button_active');
+    //});
 
     //слушатель на удаление
-    card.querySelector('.element__item-delete').addEventListener('click', deleteCard);
+    //card.querySelector('.element__item-delete').addEventListener('click', deleteCard);
 
     //слушатель и функция открытия картинки во весь экран
-    cardImage.addEventListener('click', function () {
-        openPopup(popupViewImage);
-        viewImageContent.src = element.link;
-        viewImageContent.alt = element.name;
-        viewImageTitle.textContent = element.name;
-    });
+    //cardImage.addEventListener('click', function () {
+      //  openPopup(popupViewImage);
+     //   viewImageContent.src = element.link;
+     //   viewImageContent.alt = element.name;
+     //   viewImageTitle.textContent = element.name;
+   // });
 
-    return card;
-};
+   // return card;
+//};
 
 //сохранение новой карточки в начало блока и закрытие попапа добавления карточки
 function handleFormSubmitAdd(evt) {
