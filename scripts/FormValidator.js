@@ -1,12 +1,3 @@
-validationSettings = {
-    formSelector: '.popup__form',
-    inputSelector: '.popup__text',
-    submitButtonSelector: '.popup__save-button',
-    inactiveButtonClass: 'popup__save-button_inactive',
-    inputErrorClass: 'popup__input_type_error',
-    errorClass: 'popup__error-message'
-};
-
 class FormValidator {
     constructor(validationSettings, formElement) {
         this._validationSettings = validationSettings;
@@ -84,11 +75,22 @@ class FormValidator {
     }
 };
 
+const validationSettings = {
+    formSelector: '.popup__form',
+    inputSelector: '.popup__text',
+    submitButtonSelector: '.popup__save-button',
+    inactiveButtonClass: 'popup__save-button_inactive',
+    inputErrorClass: 'popup__input_type_error',
+    errorClass: 'popup__error-message'
+};
+
 //создаем каждой форме экземпляр класса и запускаем валидацию
-const addForm = document.forms.profile;
+const addForm = document.querySelector('.popup__form_mesto');
 const validateAddForm = new FormValidator(validationSettings, addForm);
 validateAddForm.enableValidation();
 
-const editForm = document.forms.mesto;
+const editForm = document.querySelector('.popup__form-profile');
 const validateEditForm = new FormValidator(validationSettings, editForm);
 validateEditForm.enableValidation();
+
+export default FormValidator; 

@@ -1,3 +1,5 @@
+import {openPopup} from './index.js'; 
+
 class Card {
     constructor(data, templateSelector) {
         this._title = data.name;
@@ -13,11 +15,12 @@ class Card {
             .content
             .querySelector('.element__item')
             .cloneNode(true);
-        return cardElement;
+        return cardElement;        
     }
+    
     //добавляем в разметку данные и размещаем в дом
     generationCard() {
-        this._setEventListeners();
+        this._setEventListeners();        
         this._element.querySelector('.element__item-img').src = this._image;
         this._element.querySelector('.element__item-title').textContent = this._title;
         this._element.querySelector('.element__item-img').alt = this._title;
@@ -42,7 +45,7 @@ class Card {
         viewImageTitle.textContent = this._title;
     }
 
-    //слушатели событий
+     //слушатели событий
     _setEventListeners() {
         this._buttonLike = this._element.querySelector('.element__item-button');
         this._buttonLike.addEventListener('click', () => {
@@ -60,10 +63,6 @@ class Card {
     }
 }
 
-//цикл обходит массив и для каждого элемента
-//создаем новый экземпляр Card,подгот.к публикации и добавляем в дом.
-initialCards.forEach((item) => {
-    const card = new Card(item, '.element__template');
-    const cardElement = card.generationCard();
-    document.querySelector('.element').append(cardElement);
-});
+
+
+export default Card;
