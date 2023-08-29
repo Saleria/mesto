@@ -1,7 +1,6 @@
 export { openPopup };
 import Card from "./Card.js";
 import FormValidator from './FormValidator.js';
-import {initialCards} from './constants.js';
 
 const popup = document.querySelector('.popup');
 const buttonOpenEditProfileForm = document.querySelector('.profile__list-edit-button');
@@ -51,24 +50,13 @@ function submitEditProfileForm(evt) {
     closePopup(popupEditProfile);
 }
 
-//цикл обходит массив и для каждого элемента
-//создаем новый экземпляр Card,подгот.к публикации и добавляем в дом.
-initialCards.forEach((item) => {
-    const card = new Card(item, '.element__template');
-    const cardElement = card.generationCard();
-    containerCards.append(cardElement);
-});
-
 //сохранение новой карточки в начало блока и закрытие попапа добавления карточки
 function handleFormSubmitAdd(evt) {
     evt.preventDefault();
+    const newCardData = new Card({ name: mestoName.value, link: mestoUrl.value });
+    const addNewElement = newCardData.generationCard();
     closePopup(popupAddCard);
-    const newCardData = {
-        name: mestoName.value,
-        link: mestoUrl.value
-    };
-    const newElementAdd = new Card(newCardData);
-    containerCards.prepend(newElementAdd.generationCard());
+    containerCards.prepend(addNewElement);
     formAddCard.reset();
 }
 
