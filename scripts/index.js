@@ -51,6 +51,7 @@ function submitEditProfileForm(evt) {
 }
 
 //сохранение новой карточки в начало блока и закрытие попапа добавления карточки
+//создаем новый экземпляр класса и вызываем публ.функцию создания карточки 
 function handleFormSubmitAdd(evt) {
     evt.preventDefault();
     const newCardData = new Card({ name: mestoName.value, link: mestoUrl.value });
