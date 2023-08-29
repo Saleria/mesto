@@ -66,7 +66,7 @@ class FormValidator {
             });
         });
     };
-
+    //проверка всей формы на валидность
     enableValidation() {
         this._formElement.addEventListener('submit', (evt) => {
             evt.preventDefault();
@@ -84,7 +84,8 @@ const validationSettings = {
     errorClass: 'popup__error-message'
 };
 
-//создаем каждой форме экземпляр класса и запускаем валидацию
+//создаем каждой форме экземпляр класса
+//и запускаем валидацию для каждой формы отдельно
 const addForm = document.querySelector('.popup__form_mesto');
 const validateAddForm = new FormValidator(validationSettings, addForm);
 validateAddForm.enableValidation();
