@@ -4,7 +4,7 @@ class Card {
     constructor(data, templateSelector) {
         this._name = data.name;
         this._link = data.link;
-        this._templateSelector = templateSelector;        
+        this._templateSelector = templateSelector;
     }
 
     //подготавливаем карточку
@@ -64,7 +64,5 @@ class Card {
         });
     }
 }
-
-
 
 export default Card;

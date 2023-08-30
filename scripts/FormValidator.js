@@ -74,6 +74,7 @@ class FormValidator {
             });
         });
     };
+
     //проверка всей формы на валидность
     enableValidation() {
         this._formElement.addEventListener('submit', (evt) => {

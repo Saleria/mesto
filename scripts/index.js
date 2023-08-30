@@ -2,7 +2,7 @@ export { openPopup };
 import Card from "./Card.js";
 import FormValidator from './FormValidator.js';
 import { initialCards } from './constants.js';
-import {validationSettings} from './FormValidator.js';
+import { validationSettings } from './FormValidator.js';
 
 const popup = document.querySelector('.popup');
 const buttonOpenEditProfileForm = document.querySelector('.profile__list-edit-button');
@@ -17,7 +17,6 @@ const popupAddOpenButton = document.querySelector('.profile__add-button');
 const formAddCard = document.querySelector('.popup__form_mesto');
 const mestoName = formAddCard.querySelector('.popup__text_type_mesto');
 const mestoUrl = formAddCard.querySelector('.popup__text_type_url');
-const popupViewImage = document.querySelector('.popup_type_image');
 const popupEditProfile = document.querySelector('.popup_edit-profile');
 const closeButtons = document.querySelectorAll('.popup__close');
 
@@ -53,13 +52,13 @@ function submitEditProfileForm(evt) {
 }
 
 //функция возвращает готовую карточку со всеми обработчиками
-function createCard (item) {
+function createCard(item) {
     const card = new Card(item, '.element__template');
     const cardElement = card.generationCard();
-    return cardElement; 
+    return cardElement;
 }
 
-initialCards.forEach((item) => {     
+initialCards.forEach((item) => {
     containerCards.append(createCard(item));
 });
 
@@ -75,7 +74,7 @@ validateEditForm.enableValidation();
 //сохранение новой карточки в начало блока и закрытие попапа добавления карточки
 //создаем новый экземпляр класса и вызываем публ.функцию создания карточки 
 function handleFormSubmitAdd(evt) {
-    evt.preventDefault();    
+    evt.preventDefault();
     const newCardData = ({ name: mestoName.value, link: mestoUrl.value });
     closePopup(popupAddCard);
     containerCards.prepend(createCard(newCardData));
@@ -123,7 +122,7 @@ function closePopupOnEscape(evt) {
 //находим ближайший к "крестику" попап и вызываем функцию закрытия попапа
 closeButtons.forEach((btn) => {
     const popup = btn.closest('.popup');
-    btn.addEventListener ('click', function () {
-        closePopup (popup); 
+    btn.addEventListener('click', function () {
+        closePopup(popup);
     });
 })
