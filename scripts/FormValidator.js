@@ -43,8 +43,16 @@ class FormValidator {
         })
     };
 
+    // очищаем поля ввода от ошибок. 
+    resetValidation() {
+        this.changeButtonState();
+        this._inputList.forEach((inputElement) => {
+            this._hideInputError(inputElement)
+        });
+    }
+
     //отключаем и включаем кнопку.
-    _changeButtonState() {
+    changeButtonState() {
         if (this._checkInvalidInput(this._inputList)) {
             this._buttonSave.classList.add(this._inactiveButtonClass);
             this._buttonSave.setAttribute('disabled', true);
@@ -58,11 +66,11 @@ class FormValidator {
     //каждому полю навешиваем слушатель
     //вызываем функцию включ и отключ кнопки отправки
     _setEventListeners() {
-        this._changeButtonState();
+        this.changeButtonState();
         this._inputList.forEach((inputElement) => {
             inputElement.addEventListener('input', () => {
                 this._checkInputValidity(inputElement)
-                this._changeButtonState();
+                this.changeButtonState();
             });
         });
     };
@@ -75,7 +83,7 @@ class FormValidator {
     }
 };
 
-const validationSettings = {
+export const validationSettings = {
     formSelector: '.popup__form',
     inputSelector: '.popup__text',
     submitButtonSelector: '.popup__save-button',
@@ -84,14 +92,4 @@ const validationSettings = {
     errorClass: 'popup__error-message'
 };
 
-//создаем каждой форме экземпляр класса
-//и запускаем валидацию для каждой формы отдельно
-const addForm = document.querySelector('.popup__form_mesto');
-const validateAddForm = new FormValidator(validationSettings, addForm);
-validateAddForm.enableValidation();
-
-const editForm = document.querySelector('.popup__form-profile');
-const validateEditForm = new FormValidator(validationSettings, editForm);
-validateEditForm.enableValidation();
-
-export default FormValidator; 
+export default FormValidator;
