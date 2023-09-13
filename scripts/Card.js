@@ -1,10 +1,12 @@
-import { openPopup } from './index.js';
-
 class Card {
-    constructor(data, templateSelector) {
+    constructor(data, templateSelector, handleCardClick) {
         this._name = data.name;
         this._link = data.link;
         this._templateSelector = templateSelector;
+        this._handleCardClick = handleCardClick; 
+        //this._popupViewImage = document.querySelector('.popup_type_image');
+        //this._viewImageContent = this._popupViewImage.querySelector('.popup__img-content');
+        //this._viewImageTitle = this._popupViewImage.querySelector('.popup__img-title');
     }
 
     //подготавливаем карточку
@@ -17,7 +19,7 @@ class Card {
         return cardElement;
     }
 
-    //добавляем в разметку данные и размещаем в дом
+    //добавляем в разметку данные
     generationCard() {
         this._element = this._getTemplate();
         this._elementImage = this._element.querySelector('.element__item-img');
@@ -37,13 +39,6 @@ class Card {
         this._element.remove();
     }
 
-    _openViewImagePopup() {
-        openPopup(this._popupViewImage);
-        this._viewImageContent.src = this._link;
-        this._viewImageContent.alt = this._name;
-        this._viewImageTitle.textContent = this._name;
-    }
-
     //слушатели событий
     _setEventListeners() {
         this._buttonLike = this._element.querySelector('.element__item-button');
@@ -56,11 +51,9 @@ class Card {
             this._deleteCard();
         });
 
-        this._popupViewImage = document.querySelector('.popup_type_image');
-        this._viewImageContent = this._popupViewImage.querySelector('.popup__img-content');
-        this._viewImageTitle = this._popupViewImage.querySelector('.popup__img-title');
+        
         this._elementImage.addEventListener('click', () => {
-            this._openViewImagePopup();
+            this._handleCardClick(this._name, this._link);
         });
     }
 }
