@@ -3,10 +3,7 @@ class Card {
         this._name = data.name;
         this._link = data.link;
         this._templateSelector = templateSelector;
-        this._handleCardClick = handleCardClick; 
-        //this._popupViewImage = document.querySelector('.popup_type_image');
-        //this._viewImageContent = this._popupViewImage.querySelector('.popup__img-content');
-        //this._viewImageTitle = this._popupViewImage.querySelector('.popup__img-title');
+        this._handleCardClick = handleCardClick;         
     }
 
     //подготавливаем карточку

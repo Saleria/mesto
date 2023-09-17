@@ -7,14 +7,14 @@ class Section {
 
     //принимает дом-элемент и вставляет его в контейнер
     addItem(item) {
-        this._containerSelector.append(item);
+        this._containerSelector.prepend(item);
     }
 
     //перебираем массив данных и вызываем для каждого эл-та метод addItem
     renderItems() {
         this._initialArray.forEach((item) => {
             this._renderer (item);  
-        })
+        });
     }
 }
 
