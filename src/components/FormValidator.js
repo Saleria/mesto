@@ -1,6 +1,5 @@
 class FormValidator {
     constructor(validationSettings, formElement) {
-        this._validationSettings = validationSettings;
         this._formElement = formElement;
         this._formSelector = validationSettings.formSelector;
         this._inputSelector = validationSettings.inputSelector;
@@ -82,15 +81,6 @@ class FormValidator {
         });
         this._setEventListeners();
     }
-};
-
-export const validationSettings = {
-    formSelector: '.popup__form',
-    inputSelector: '.popup__text',
-    submitButtonSelector: '.popup__save-button',
-    inactiveButtonClass: 'popup__save-button_inactive',
-    inputErrorClass: 'popup__input_type_error',
-    errorClass: 'popup__error-message'
 };
 
 export default FormValidator;

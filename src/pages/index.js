@@ -2,7 +2,7 @@ import './index.css';
 import Card from "../components/Card.js";
 import FormValidator from '../components/FormValidator.js';
 import { initialCards } from '../utils/constants.js';
-import { validationSettings } from '../components/FormValidator.js';
+import { validationSettings } from '../utils/constants.js';
 import Section from '../components/Section.js';
 import { PopupWithImage } from "../components/PopupWithImage.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
@@ -59,8 +59,6 @@ const popupAddCard = new PopupWithForm('.popup_add',
 popupAddOpenButton.addEventListener('click', function () {
     popupAddCard.open();
     validateAddForm.resetValidation();
-    formAddCard.reset();
-    validateAddForm.changeButtonState();
 });
 
 popupAddCard.setEventListeners();
