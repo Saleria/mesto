@@ -43,23 +43,41 @@ class FormValidator {
     };
 
     // очищаем поля ввода от ошибок. 
-    resetValidation() {
-        this.changeButtonState();
+    resetValidation() {        
         this._inputList.forEach((inputElement) => {
             this._hideInputError(inputElement)
         });
     }
 
-    //отключаем и включаем кнопку.
+    //дизейблим кнопку
+    disableButtonSave() {
+        this._buttonSave.classList.add(this._inactiveButtonClass);
+        this._buttonSave.setAttribute('disabled', true);
+    }
+
+    enableButtonSave() {
+        this._buttonSave.classList.remove(this._inactiveButtonClass);
+        this._buttonSave.removeAttribute('disabled', false);
+    }
+
     changeButtonState() {
-        if (this._checkInvalidInput(this._inputList)) {
-            this._buttonSave.classList.add(this._inactiveButtonClass);
-            this._buttonSave.setAttribute('disabled', true);
+        if(this._checkInvalidInput()) {
+            this.disableButtonSave ();
         } else {
-            this._buttonSave.classList.remove(this._inactiveButtonClass);
-            this._buttonSave.removeAttribute('disabled', false);
+            this.enableButtonSave();
         }
-    };
+    }
+
+    //отключаем и включаем кнопку.
+    //changeButtonState() {
+        //if (this._checkInvalidInput(this._inputList)) {
+           // this._buttonSave.classList.add(this._inactiveButtonClass);
+           // this._buttonSave.setAttribute('disabled', true);
+       // } else {
+          //  this._buttonSave.classList.remove(this._inactiveButtonClass);
+          //  this._buttonSave.removeAttribute('disabled', false);
+       // }
+   // };
 
     //добавл.обработчик всем полям формы
     //каждому полю навешиваем слушатель
@@ -76,9 +94,6 @@ class FormValidator {
 
     //проверка всей формы на валидность
     enableValidation() {
-        this._formElement.addEventListener('submit', (evt) => {
-            evt.preventDefault();
-        });
         this._setEventListeners();
     }
 };

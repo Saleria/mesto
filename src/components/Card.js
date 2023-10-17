@@ -2,6 +2,9 @@ class Card {
     constructor(data, templateSelector, handleCardClick) {
         this._name = data.name;
         this._link = data.link;
+        //this._id = data._id;
+        //this._ownerId = data._owner._id; 
+       // this._userId = userId; 
         this._templateSelector = templateSelector;
         this._handleCardClick = handleCardClick;         
     }
@@ -32,7 +35,7 @@ class Card {
         this._buttonLike.classList.toggle('element__item-button_active');
     }
 
-    _deleteCard() {
+    deleteCard() {
         this._element.remove();
     }
 
@@ -45,7 +48,7 @@ class Card {
 
         this._buttonDelete = this._element.querySelector('.element__item-delete');
         this._buttonDelete.addEventListener('click', () => {
-            this._deleteCard();
+            this.deleteCard();
         });
 
         
