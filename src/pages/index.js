@@ -1,7 +1,6 @@
 import './index.css';
 import Card from "../components/Card.js";
 import FormValidator from '../components/FormValidator.js';
-import { initialCards } from '../utils/constants.js';
 import { validationSettings } from '../utils/constants.js';
 import Section from '../components/Section.js';
 import { PopupWithImage } from "../components/PopupWithImage.js";
@@ -136,8 +135,6 @@ const popupAddCard = new PopupWithForm('.popup_add',
                 cardList.addItem(createCard(data));
                 popupAddCard.close();
             })
-            //const newCardData = { name: data['mesto-name'], link: data['url'] };
-            //cardList.addItem(createCard(newCardData));
             .catch((error) => {
                 console.log(error);
             })
