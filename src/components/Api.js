@@ -45,7 +45,7 @@ export class Api {
             .then(this._testResponse)
     }
 
-    deleteCard(cardId)) {
+    deleteCard(cardId) {
         return fetch(`${this._url}/cards/${cardId}`, {
             method: 'DELETE', 
             headers: this._headers

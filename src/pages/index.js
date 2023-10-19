@@ -33,7 +33,7 @@ const handleCardClick = (name, link) => {
 
 //функция возвращает готовую карточку
 function createCard(item) {
-    const card = new Card(item, '.element__template', handleCardClick);
+    const card = new Card(item, '.element__template', handleCardClick, userId, handleCardDelete);
     const cardElement = card.generationCard();
     return cardElement;
 }
@@ -81,6 +81,7 @@ const userInfo = new UserInfo(
 //создаем экземпляр класса попап редактир.профиля
 const popupEditProfile = new PopupWithForm('.popup_edit-profile',
     (data) => {
+        popupEditProfile.renderLoading(true); 
         api.changeUserInfo({
             name: data['text-name'],
             about: data['job-name']
@@ -95,7 +96,10 @@ const popupEditProfile = new PopupWithForm('.popup_edit-profile',
             })
             .catch((error) => {
                 console.log(error);
-            });
+            })
+            .finally(() =>{
+                popupEditProfile.renderLoading(false);
+            })
     });
 
 //открытие попапа редактирования с сохранением исход.данных
@@ -123,6 +127,7 @@ popupViewImage.setEventListeners();
 //попап добавления карточки
 const popupAddCard = new PopupWithForm('.popup_add',
     (data) => {
+        popupAddCard.renderLoading(true);
         api.addNewCard({
             name: data['mesto-name'],
             link: data['url']
@@ -136,6 +141,9 @@ const popupAddCard = new PopupWithForm('.popup_add',
             .catch((error) => {
                 console.log(error);
             })
+            .finally(() => {
+                popupAddCard.renderLoading(false);
+            })
     }
 );
 
@@ -147,3 +155,24 @@ popupAddOpenButton.addEventListener('click', function () {
 });
 
 popupAddCard.setEventListeners();
+
+const popupWithDelete = new PopupDelete('.popup_delete');
+popupWithDelete.setEventListeners(); 
+
+function handleCardDelete(id, item) {
+    popupWithDelete.open(); 
+    popupWithDelete.setSubmitAction(() => {
+        handleDeleteClick(id, item); 
+    })
+}
+
+function handleDeleteClick (id, item) {
+    api.deleteCard(id)
+        .then(() => {
+            item.deleteCard();
+            popupWithDelete.close(); 
+        })
+        .catch((error) => {
+            console.log(error); 
+        })
+}

@@ -1,12 +1,14 @@
 class Card {
-    constructor(data, templateSelector, handleCardClick) {
+    constructor(data, templateSelector, handleCardClick, userId, handleCardDelete) {
+        this.data = data; 
         this._name = data.name;
         this._link = data.link;
-        //this._id = data._id;
-        //this._ownerId = data._owner._id; 
-       // this._userId = userId; 
+        this._id = data._id;
+        this._ownerId = data.owner._id; 
+        this._userId = userId; 
         this._templateSelector = templateSelector;
-        this._handleCardClick = handleCardClick;         
+        this._handleCardClick = handleCardClick;
+        this._handleCardDelete = handleCardDelete;                
     }
 
     //подготавливаем карточку
@@ -23,7 +25,9 @@ class Card {
     generationCard() {
         this._element = this._getTemplate();
         this._elementImage = this._element.querySelector('.element__item-img');
+        this._buttonDelete = this._element.querySelector('.element__item-delete');
         this._setEventListeners();
+        this._showButtonDelete(); 
 
         this._elementImage.src = this._link;
         this._elementImage.alt = this._name;
@@ -39,6 +43,12 @@ class Card {
         this._element.remove();
     }
 
+    _showButtonDelete() {
+        if (this._userId !== this._ownerId) {
+            this._buttonDelete.style.display = 'none'
+        }
+    }
+
     //слушатели событий
     _setEventListeners() {
         this._buttonLike = this._element.querySelector('.element__item-button');
@@ -46,9 +56,8 @@ class Card {
             this._likeCard();
         });
 
-        this._buttonDelete = this._element.querySelector('.element__item-delete');
         this._buttonDelete.addEventListener('click', () => {
-            this.deleteCard();
+            this._handleCardDelete(this._id, this);
         });
 
         
