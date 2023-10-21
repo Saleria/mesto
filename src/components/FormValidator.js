@@ -43,7 +43,7 @@ class FormValidator {
     };
 
     // очищаем поля ввода от ошибок. 
-    resetValidation() {        
+    resetValidation() {
         this._inputList.forEach((inputElement) => {
             this._hideInputError(inputElement)
         });
@@ -61,23 +61,12 @@ class FormValidator {
     }
 
     changeButtonState() {
-        if(this._checkInvalidInput()) {
-            this.disableButtonSave ();
+        if (this._checkInvalidInput()) {
+            this.disableButtonSave();
         } else {
             this.enableButtonSave();
         }
     }
-
-    //отключаем и включаем кнопку.
-    //changeButtonState() {
-        //if (this._checkInvalidInput(this._inputList)) {
-           // this._buttonSave.classList.add(this._inactiveButtonClass);
-           // this._buttonSave.setAttribute('disabled', true);
-       // } else {
-          //  this._buttonSave.classList.remove(this._inactiveButtonClass);
-          //  this._buttonSave.removeAttribute('disabled', false);
-       // }
-   // };
 
     //добавл.обработчик всем полям формы
     //каждому полю навешиваем слушатель

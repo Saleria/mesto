@@ -12,7 +12,9 @@ import {
     nameInput,
     jobInput,
     popupAddOpenButton,
-    formAddCard
+    formAddCard,
+    formProfileAvatar,
+    buttonOpenEditAvatar
 } from '../utils/constants.js';
 import { PopupDelete } from '../components/PopupDelete';
 import { Api } from '../components/Api';
@@ -26,13 +28,16 @@ validateAddForm.enableValidation();
 const validateEditForm = new FormValidator(validationSettings, formEditProfile);
 validateEditForm.enableValidation();
 
+const validateAvatarForm = new FormValidator(validationSettings, formProfileAvatar);
+validateAvatarForm.enableValidation(); 
+
 const handleCardClick = (name, link) => {
     popupViewImage.open(name, link);
 }
 
 //функция возвращает готовую карточку
 function createCard(item) {
-    const card = new Card(item, '.element__template', handleCardClick, userId, handleCardDelete);
+    const card = new Card(item, '.element__template', handleCardClick, userId, handleCardDelete, handleCardLike);
     const cardElement = card.generationCard();
     return cardElement;
 }
@@ -43,8 +48,6 @@ const cardList = new Section({
         cardList.addItem(card);
     }
 }, '.element');
-
-//cardList.renderItems();
 
 const api = new Api({
     url: 'https://mesto.nomoreparties.co/v1/cohort-77',
@@ -73,7 +76,8 @@ Promise.all(promises)
 const userInfo = new UserInfo(
     {
         nameSelector: '.profile__list-title',
-        infoSelector: '.profile__list-subtitle'
+        infoSelector: '.profile__list-subtitle',
+        avatarSelector: '.profile__avatar'
     }
 );
 
@@ -121,8 +125,6 @@ buttonOpenEditProfileForm.addEventListener('click', openEditProfileForm);
 const popupViewImage = new PopupWithImage('.popup_type_image');
 popupViewImage.setEventListeners();
 
-
-
 //попап добавления карточки
 const popupAddCard = new PopupWithForm('.popup_add',
     (data) => {
@@ -153,6 +155,35 @@ popupAddOpenButton.addEventListener('click', function () {
 
 popupAddCard.setEventListeners();
 
+//попап редактирования аватара
+const popupEditAvatar = new PopupWithForm('.popup__avatar', 
+(data) => {
+    popupEditAvatar.renderLoading(true);
+    api.changeUserAvatar({
+        avatar: data['avatar-url']
+    })
+    .then(() => {
+        userInfo.setUserAvatar({
+            avatar: data['avatar-url']
+        });
+        popupEditAvatar.close(); 
+    })
+    .catch((error) =>{
+        console.log(error);
+    })
+    .finally(() =>{
+        popupEditAvatar.renderLoading(false)
+    })
+});
+
+popupEditAvatar.setEventListeners();
+
+buttonOpenEditAvatar.addEventListener('click', function() {
+    popupEditAvatar.open(); 
+    validateAvatarForm.resetValidation(); 
+});
+
+//попап удаления только своей карточки
 const popupWithDelete = new PopupDelete('.popup_delete');
 popupWithDelete.setEventListeners(); 
 
@@ -173,3 +204,15 @@ function handleDeleteClick (id, item) {
             console.log(error); 
         })
 }
+
+//лайк
+function handleCardLike(card) {
+    
+        api.changeLikeState(card.getId(), card.isLiked())
+        .then((res) => {
+            card.setLikeState(res);
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+    }  

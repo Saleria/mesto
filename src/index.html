@@ -105,13 +105,36 @@
         <button class="popup__close popup__close_type_delete" type="button"></button>
 
     </section>
+    <section class="popup popup__avatar">
+        <div class="popup__container">
+            <button class="popup__close popup__close_type_avatar" type="button"></button>
+            <h2 class="popup__title">Обновить аватар</h2>
+            <form class="popup__form popup__form_avatar" name="avatar" novalidate>
+                <fieldset class="popup__info">
+                    <div class="popup__input">
+                        <input id="avatar-url" autocomplete="off" type="url" name="avatar-url"
+                            class="popup__text popup__text_type_avatar-url" placeholder="Ссылка на картинку" required>
+                        <span id="avatar-url-error" class="popup__error-message"></span>
+                    </div>
+                </fieldset>
+                <button class="popup__save-button popup__save-button_type_avatar" type="submit" disabled>
+                    Сохранить
+                </button>
+            </form>
+        </div>
+    </section>
+
     <template class="element__template">
         <li class="element__item">
             <img class="element__item-img element__photo" alt="">
             <button class="element__item-delete" type="button"></button>
             <div class="element__item-content">
                 <h2 class="element__item-title element__photo-title"></h2>
-                <button class="element__item-button" type="button"></button>
+                <div class="element__item-like">
+                    <button class="element__item-button" type="button"></button>
+                    <div class="element__item-quantity">0</div>
+                </div>
+                
             </div>
         </li>
     </template>

@@ -5,6 +5,8 @@ const nameInput = formEditProfile.querySelector('.popup__text_type_name');
 const jobInput = formEditProfile.querySelector('.popup__text_type_job');
 const popupAddOpenButton = document.querySelector('.profile__add-button');
 const formAddCard = document.querySelector('.popup__form_mesto');
+const formProfileAvatar = document.querySelector('.popup__form_avatar');
+const buttonOpenEditAvatar = document.querySelector('.avatar__edit-button');
 
 export {
     buttonOpenEditProfileForm,
@@ -12,7 +14,9 @@ export {
     nameInput,
     jobInput,
     popupAddOpenButton,
-    formAddCard
+    formAddCard,
+    formProfileAvatar,
+    buttonOpenEditAvatar
 }; 
 
 export const validationSettings = {
