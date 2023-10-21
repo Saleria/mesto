@@ -1,4 +1,4 @@
-.avatar__edit-button {
+.profile__avatar-edit-button {
     background: none;
     background-image: url(../../../images/VectorAvatar.svg);
     background-repeat: no-repeat;
@@ -17,7 +17,7 @@
     border-radius: 50%;
 }
 
-.avatar__edit-button:hover {
+.profile__avatar-edit-button:hover {
     opacity: .8;
     background-color: rgba(0, 0, 0, .8);
     transition: all .3s linear;

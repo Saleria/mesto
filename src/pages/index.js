@@ -156,7 +156,7 @@ popupAddOpenButton.addEventListener('click', function () {
 popupAddCard.setEventListeners();
 
 //попап редактирования аватара
-const popupEditAvatar = new PopupWithForm('.popup__avatar', 
+const popupEditAvatar = new PopupWithForm('.popup_avatar', 
 (data) => {
     popupEditAvatar.renderLoading(true);
     api.changeUserAvatar({
