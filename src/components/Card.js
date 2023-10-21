@@ -82,13 +82,9 @@ class Card {
     //слушатели событий
     _setEventListeners() {
         this._buttonLike.addEventListener('click', () => {
-            if (this._buttonLike.classList.contains('element__item-button_active'))
-            {this._handleCardLikeDelete(this);
-            } else {
-                this._handleCardLike(this); 
-            }
-        });
-
+            this._handleCardLike(this); 
+            });
+        
         this._buttonDelete.addEventListener('click', () => {
             this._handleCardDelete(this._id, this);
         });

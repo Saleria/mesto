@@ -66,6 +66,7 @@ Promise.all(promises)
     .then(([userData, initialCardsData]) => {
         userId = userData._id;
         userInfo.setUserInfo(userData);
+        userInfo.setUserAvatar(userData);
         cardList.renderItems(initialCardsData, userData);
     })
     .catch((error) => {
@@ -151,6 +152,7 @@ const popupAddCard = new PopupWithForm('.popup_add',
 popupAddOpenButton.addEventListener('click', function () {
     popupAddCard.open();
     validateAddForm.resetValidation();
+    validateAddForm.disableButtonSave();
 });
 
 popupAddCard.setEventListeners();
@@ -180,7 +182,8 @@ popupEditAvatar.setEventListeners();
 
 buttonOpenEditAvatar.addEventListener('click', function() {
     popupEditAvatar.open(); 
-    validateAvatarForm.resetValidation(); 
+    validateAvatarForm.resetValidation();
+    validateAvatarForm.disableButtonSave();
 });
 
 //попап удаления только своей карточки
